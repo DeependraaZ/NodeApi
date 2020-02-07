@@ -4,6 +4,7 @@
   "description": "Assignment of Api",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --ignore ./public/uploads index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
