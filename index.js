@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require('morgan');
 const userRouter = require('./routes/users');
+const roomRouter = require('./routes/room');
 const feedbackRouter = require('./routes/feedback');
 const dotenv = require('dotenv').config();
 const uploadRouter = require('./routes/upload');
@@ -23,6 +24,7 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: t
     }, (err) => console.log(err));
 
 app.use('/users', userRouter);
+app.use('/room', roomRouter);
 app.use('/upload', uploadRouter);
 app.use('/feedback', feedbackRouter);
 app.use(auth.verifyUser);
