@@ -30,9 +30,9 @@ router.route('/')
                 status: 200,
                 isSuccess: true,
                 data: data,
-                message: 'Successfully Inserted'
+                message: 'Sucessfully sent'
             })
-            console.log("Inserted Successfully");
+            console.log("Message sent Successfully");
         }
         catch(err){
             res.json({
