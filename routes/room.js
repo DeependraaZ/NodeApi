@@ -1,6 +1,8 @@
 const express = require('express');
+const jwt  = require('jsonwebtoken')
 var router = express.Router();
 const roomModel = require('../models/room');
+const auth = require('../auth');
 
 router.route('/')
     .get( async (req, res) =>{
@@ -44,12 +46,26 @@ router.route('/')
         }
     })
 
-router.get('/room',(req,res,next)=>{
-    roomModel.find({})
-    .then((result)=>{
-        res.json(result)
+    router.get('/listroom',auth.verifyRoom,(req,res,next)=>{
+        roomModel.findById({_id:req.room._id})
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(next)
     })
-    .catch(next)
-})
+
+    router.put('/roomupdate',auth.verifyRoom,(req,res,next)=>{
+        Room.findOneAndUpdate({_id: req.body._id}, req.body, { new: true }, (err, doc) => {
+            if(!err) {
+                res.json({ status: 'Room Updated'});
+            } else {
+                Console.log('Error' + err );
+                res.json('erroe on update');
+            }
+    
+        });
+    });
+    
+
 
 module.exports = router;
